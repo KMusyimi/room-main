@@ -1,0 +1,55 @@
+:root {
+  font-family: "League Spartan" ,system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: normal;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgb(29, 22, 22);
+  background-color: rgb(241, 240, 233);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html {
+  box-sizing: border-box;
+}
+
+*, *:after, *:before {
+  box-sizing: inherit;
+  padding: unset;
+  margin: unset;
+}
+
+
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+li {
+  list-style: none;
+}
+a{
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  border: 1px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+

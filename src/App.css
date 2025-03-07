@@ -1,0 +1,123 @@
+.header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    z-index: 99;
+    padding-block: 2.5em;
+    width: 100%;
+}
+
+.header h1 {
+    margin: auto;
+    color: rgb(241, 240, 233);
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.header button {
+    position: sticky;
+    z-index: 100;
+    background-color: transparent;
+    top: 0;
+    left: 1.5em;
+    outline: transparent;
+    border: none;
+}
+
+.header button img {
+    width: 1.35em;
+}
+
+.header nav ul {
+    display: flex;
+    align-items: center;
+}
+
+.header .main-nav--mobile {
+    position: absolute;
+    padding-block: 2.5em;
+    top: 0;
+    order: -1;
+    width: 0;
+    overflow: hidden;
+    transition: width 350ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    background-color: rgb(241, 240, 233);
+}
+
+.header .main-nav--mobile.open {
+    width: 100dvw;
+}
+
+.header .main-nav--mobile ul {
+    justify-content: end;
+    gap: 2em;
+}
+
+.header .main-nav--mobile ul a {
+    margin-top: .5em;
+    font-size: 1rem;
+    font-weight: bold;
+    opacity: .25;
+    transition: opacity 100ms linear 75ms;
+}
+
+.header .main-nav--mobile.open ul a {
+    opacity: 1;
+}
+
+.header .main-nav--mobile ul li:last-of-type a {
+    margin-right: 1.5em;
+}
+
+.img-slider {
+    height: 100vmin;
+    width: 100dvw;
+    overflow: hidden;
+    position: relative;
+}
+
+.img-slider ul {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    height: inherit;
+    overflow: hidden;
+    transition: left 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.img-slider ul li {
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: inherit;
+    width: 100dvw;
+}
+
+.img-slider ul li:nth-of-type(1) {
+    background-image: url('assets/images/mobile-image-hero-1.jpg');
+}
+
+.img-slider ul li:nth-of-type(2) {
+    background-image: url('assets/images/mobile-image-hero-2.jpg');
+}
+
+.img-slider ul li:nth-of-type(3) {
+    background-image: url('assets/images/mobile-image-hero-3.jpg');
+}
+
+.hero-wrapper {
+    position: relative;
+}
+
+.btn-wrapper {
+    position: absolute;
+    top: -4em;
+    right: 0;
+}
+
+.btn-wrapper button {
+    background-color: rgb(29, 22, 22);
+    padding: 1.1em 1.5em;
+
+}

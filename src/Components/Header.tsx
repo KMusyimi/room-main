@@ -1,44 +1,49 @@
 import {NavLink} from 'react-router-dom'
+import * as React from "react";
 import {JSX, useEffect, useState} from "react";
 import iconLeft from './../assets/images/icon-angle-left.svg';
 import iconRight from './../assets/images/icon-angle-right.svg';
 import iconMenu from './../assets/images/icon-hamburger.svg';
 import iconClose from './../assets/images/icon-close.svg';
 import throttleEvt from '../utils.ts'
-import * as React from "react";
 
 export default function Header(): JSX.Element {
     const [toggle, setToggle] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [counter, setCounter] = useState(0);
     const [leftPosition, setLeftPosition] = useState(0);
-    const [slideCount, setSlideCount] = useState((): number => document.querySelectorAll('.slide-list').length);
+    const [slideCount, setSlideCount] = useState(0);
 
     useEffect((): () => void => {
-        const slideWrapper: HTMLElement | null = document.getElementById('slider-wrapper');
-        const slider = document.querySelector('#slider-wrapper > ul');
+            const slideWrapper: HTMLElement | null = document.getElementById('slider-wrapper');
+            const slider: HTMLElement | null = document.querySelector('#slider-wrapper > ul');
+            const slideWidth: number = slideWrapper ? slideWrapper.offsetWidth : 0;
+            if (!slider) {
+                throw {message: `${slider} null property`}
+            }
 
-        const slideWidth: number = slideWrapper ? slideWrapper.offsetWidth : 0;
-        const totalWidth = `${slideCount * slideWidth}px`;
-        if (!slider) {
-            throw {message: `${slider} null property`}
-        }
-        slider.style.width = totalWidth;
+            slider.style.width = `${slideCount * slideWidth}px`;
+
+            const throttledResizeEvt = throttleEvt(resizeEvt, 1000);
+            window.addEventListener('resize', throttledResizeEvt);
+
+            setLeftPosition(counter * slideWidth);
+            setSlideCount(prev => {
+                prev = document.querySelectorAll('.slide-list').length;
+                return prev;
+            });
 
 
-        const throttledResizeEvt: (...args: never[]) => void = throttleEvt(resizeEvt, 1000);
-        window.addEventListener('resize', throttledResizeEvt);
+            function resizeEvt() {
+                setWindowWidth(window.innerWidth);
+            }
 
-        setSlideCount(slideCount);
-        setLeftPosition(counter * slideWidth);
-
-        function resizeEvt() {
-            setWindowWidth(window.innerWidth);
-        }
-        return () => {
-            removeEventListener('resize', throttledResizeEvt);
-        };
-    }, [windowWidth, counter]);
+            return () => {
+                removeEventListener('resize', throttledResizeEvt);
+            };
+        }, [slideCount, windowWidth, counter]
+    )
+    ;
 
     function handlePrevClick(e: React.MouseEvent<HTMLButtonElement>): void {
         e.preventDefault();

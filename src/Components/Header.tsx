@@ -25,6 +25,7 @@ export default function Header(): JSX.Element {
 
             return () => {
                 removeEventListener('resize', throttledResizeEvt);
+
             };
         }, [windowWidth]
     )

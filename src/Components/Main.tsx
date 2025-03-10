@@ -1,7 +1,9 @@
 import {JSX} from "react";
+import {Outlet} from "react-router-dom";
 
 export default function Main(): JSX.Element {
-    return (<main>
-
-    </main>)
+    return (
+        <main className={'main'}>
+            <Outlet/>
+        </main>);
 }

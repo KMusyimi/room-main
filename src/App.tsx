@@ -1,12 +1,12 @@
 import './App.css'
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
-import Header from "./Components/Header.tsx";
 import Layout from "./Components/Layout.tsx";
+import Home from "./Views/Home.tsx";
 
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path={'/'} element={<Layout/>}>
-        <Route index element={<Header/>}/>
+        <Route index element={<Home/>}/>
     </Route>
 ))
 

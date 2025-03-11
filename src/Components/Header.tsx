@@ -45,10 +45,18 @@ export default function Header(): JSX.Element {
                     `main-nav--mobile ${toggle ? 'open' : ''}`
                     : 'main-nav'}>
                 <ul>
-                    <li><NavLink to={'.'}>home</NavLink></li>
-                    <li><NavLink to={'shop'}>shop</NavLink></li>
-                    <li><NavLink to={'about'}>about</NavLink></li>
-                    <li><NavLink to={'contact'}>contact</NavLink></li>
+                    <li><NavLink to={'.'}
+                                 className={({isActive}) => isActive ? 'active' : ''}>home</NavLink>
+                    </li>
+                    <li><NavLink to={'shop'}
+                                 className={({isActive}) => isActive ? 'active' : ''}>shop</NavLink>
+                    </li>
+                    <li><NavLink to={'about'}
+                                 className={({isActive}) => isActive ? 'active' : ''}>about</NavLink>
+                    </li>
+                    <li><NavLink to={'contact'}
+                                 className={({isActive}) => isActive ? 'active' : ''}>contact</NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>

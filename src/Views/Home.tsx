@@ -17,19 +17,25 @@ export default function Home() {
     useEffect((): () => void => {
         const slideWrapper: HTMLElement | null = document.getElementById('slider-wrapper');
         const throttledResizeEvt = throttleEvt(resizeEvt, 2000);
+        let slideShowTimer: number | null | undefined = null;
         window.addEventListener('resize', throttledResizeEvt);
-        setSlideWidth(slideWrapper ? slideWrapper.offsetWidth : 0);
-        setLeftPosition(counter * slideWidth);
+
+        slideShowTimer = setTimeout(nextSlide, 6000);
 
         setSlideCount(prev => {
             prev = document.querySelectorAll('.slide-list').length;
             return prev;
         });
 
+        setSlideWidth(slideWrapper ? slideWrapper.offsetWidth : 0);
+        setLeftPosition(counter * slideWidth);
+
         return () => {
             removeEventListener('resize', throttledResizeEvt);
+            clearTimeout(slideShowTimer);
         };
     }, [slideWidth, slideCount, counter]);
+
 
     function resizeEvt() {
         const slideWrapper: HTMLElement | null = document.getElementById('slider-wrapper');
@@ -49,13 +55,17 @@ export default function Home() {
 
     function handleNextClick(e: React.MouseEvent<HTMLButtonElement>): void {
         e.preventDefault();
+        nextSlide();
+    }
+
+    function nextSlide() {
         setCounter(prevState => {
             prevState++;
             if (prevState === slideCount) {
                 prevState = 0;
             }
             return prevState;
-        })
+        });
     }
 
     return (
@@ -72,7 +82,7 @@ export default function Home() {
                     <div className={'sect-wrapper'}>
                         <section id={'section-1'} className={`hero-section ${counter === 0 ? 'active' : ''}`}
                                  data-slide-content={`section-1`}>
-                            <h1> Discover innovative ways to decorate</h1>
+                            <h1> Discover <span>innovative</span> ways to decorate</h1>
                             <p className={'light-txt'}> We provide unmatched quality, comfort, and style for property
                                 owners
                                 across the country.
@@ -84,7 +94,7 @@ export default function Home() {
                         </section>
                         <section id={'section-2'} className={`hero-section ${counter === 1 ? 'active' : ''}`}
                                  data-slide-content={`section-2`}>
-                            <h1>We are available all across the globe</h1>
+                            <h1>We are <span>available</span> all across the globe</h1>
                             <p className={'light-txt'}> With stores all over the world, it's easy for you to find
                                 furniture
                                 for your home or place of
@@ -96,7 +106,7 @@ export default function Home() {
                         </section>
                         <section id={'section-3'} className={`hero-section ${counter === 2 ? 'active' : ''}`}
                                  data-slide-content={`section-3`}>
-                            <h1>Manufactured with the best materials</h1>
+                            <h1>Manufactured with the <span>best</span> materials</h1>
                             <p className={'light-txt'}>Our modern furniture store provide a high level of quality. Our
                                 company has invested in advanced
                                 technology
@@ -110,15 +120,15 @@ export default function Home() {
                                                                           alt={'black arrow icon image'}/></Link>
                     </div>
                     <div className={'btn-wrapper'}>
-                        <button id={'prev'}
+                        <button id={'prev-btn'}
                                 onClick={handlePrevClick}
-                                className={'btn'} type={'button'}><img src={iconLeft} alt={'left button icon'}
-                                                                       aria-label={'slide left icon button'}/>
+                                className={'nav-btn btn'} type={'button'}><img src={iconLeft} alt={'left button icon'}
+                                                                               aria-label={'slide left icon button'}/>
                         </button>
-                        <button id={'next'}
+                        <button id={'next-btn'}
                                 onClick={handleNextClick}
-                                className={'btn'} type={'button'}><img src={iconRight} alt={'right button icon'}
-                                                                       aria-label={'slide right icon button'}/>
+                                className={'nav-btn btn'} type={'button'}><img src={iconRight} alt={'right button icon'}
+                                                                               aria-label={'slide right icon button'}/>
                         </button>
                     </div>
                 </div>

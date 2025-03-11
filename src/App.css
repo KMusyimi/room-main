@@ -1,3 +1,8 @@
+#root {
+    display: grid;
+    place-content: center;
+}
+
 .header {
     position: fixed;
     display: flex;
@@ -50,6 +55,31 @@
     align-items: center;
 }
 
+.header nav ul a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    z-index: -1;
+    background-color: var(--bg-color);
+    transition: all 0.2s ease-in-out;
+}
+
+.header nav ul a {
+    position: relative;
+}
+
+
+.header nav ul a:hover {
+    --bg-color:rgb(233, 118, 43);
+}
+
+.header nav ul a.active {
+    --bg-color: rgb(248, 250, 252);
+}
+
 .header .main-nav--mobile {
     background-color: rgb(255, 245, 228);
     position: absolute;
@@ -99,6 +129,7 @@
 .hero-container {
     width: 100%;
 }
+
 .img-slider {
     position: relative;
     height: 100vmin;
@@ -114,7 +145,7 @@
     z-index: -100;
     height: inherit;
     overflow: hidden;
-    transition: left 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: left 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .img-slider ul li {
@@ -162,7 +193,8 @@
     width: 0;
     height: 0;
     visibility: hidden;
-    transition: visibility 0s linear, opacity 0.35s cubic-bezier(0.165, 0.84, 0.44, 1) 100ms;
+    overflow: hidden;
+    transition: visibility 0s, opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) 250ms;
 }
 
 .hero-section.active {
@@ -176,7 +208,18 @@
     font-size: 2.45em;
     margin-bottom: 0.35em;
 }
-
+.hero-section h1 > span{
+    position: relative;
+}
+.hero-section h1 > span::after {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    content: '';
+    background-color:  rgb(233, 118, 43);
+    height: 5px;
+    width: 85%;
+}
 .hero-section p {
     margin-bottom: 1.5em;
 }
@@ -185,19 +228,20 @@
     position: absolute;
     top: -4em;
     right: 0;
+    z-index: 50;
 }
 
 .btn-wrapper button {
     background-color: rgb(29, 22, 22);
     padding: 1.1em 1.5em;
+    transition: all 0.2s ease-in-out;
 }
-.about-container {
-    max-width: 625px;
-    margin: 0 auto;
-}
+
 .about-img {
     width: 100%;
+    margin-bottom: 1em;
 }
+
 .about-section {
     padding: 2.5em 1.5em;
 }
@@ -235,7 +279,6 @@
 
     .img-slider {
         height: 60vmin;
-        width: 100dvw;
     }
 
     .img-slider ul li:nth-of-type(1) {
@@ -249,15 +292,22 @@
     .img-slider ul li:nth-of-type(3) {
         --bg-img: url('assets/images/desktop-image-hero-3.jpg');
     }
-    .sect-wrapper, .about-section{
+
+    .sect-wrapper, .about-section {
         padding-inline: 0;
+    }
+
+    .sect-wrapper,
+    .about-container {
+        max-width: 625px;
+        margin: 0 auto;
     }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1280px) {
     .header {
         justify-content: start;
-        padding: 2.85em 2.5em;
+        padding: 2.85em 2.85em;
         gap: 2.5em;
         width: fit-content;
         backdrop-filter: unset;
@@ -270,7 +320,7 @@
 
     .main > .hero-container {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 840px 1fr;
         grid-template-rows: 1fr;
     }
 
@@ -300,6 +350,11 @@
 
     .sect-wrapper a.cta {
         width: fit-content;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .sect-wrapper a.cta:hover {
+        box-shadow: 0 5px 15px rgb(163, 92, 122);
     }
 
     .hero-section {
@@ -311,33 +366,34 @@
         margin-left: -2.5em;
         margin-top: 1px;
     }
+
+    .btn-wrapper button:hover {
+        background-color: hsl(0, 0%, 27%);
+        box-shadow: 0 5px 15px hsl(0, 0%, 27%);
+    }
+
     .about-container {
         display: grid;
         max-width: unset;
         justify-content: space-between;
         grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 1fr;
         width: 100%;
         margin: 0;
     }
+
     .about-section {
         padding: 3em 3em 0;
     }
-    .about-container figure {
-        height: min(100%, 266px);
-        width: min(100%, 400px);
-    }
-    .about-img{
-        height: inherit;
-        width: inherit;
-    }
-}
 
-@media only screen and (min-width: 1280px) {
-    .main > .hero-container {
-        grid-template-columns: 840px 1fr;
-    }
     .about-container figure {
         height: 266px;
         width: 400px;
+    }
+
+    .about-img {
+        height: inherit;
+        width: inherit;
+        margin-bottom: 0;
     }
 }

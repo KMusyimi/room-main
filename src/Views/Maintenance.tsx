@@ -16,7 +16,7 @@ export default function Maintenance(): JSX.Element {
   return (
     <div className="site-construction">
       <section>
-        <h1>{pathname} Page Under Construction</h1>
+        <h1>{pathname} Under Construction</h1>
         <p className="light-txt">Our website is currently under construction. Bear with us, and we plan to deliver amazing and groundbreaking features. Thank you for your patience.</p>
       </section>
       <figure><img src={maintenance} alt="an image illustration of four construction workers " /></figure>

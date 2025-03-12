@@ -1,6 +1,12 @@
 #root {
     display: grid;
     place-content: center;
+    width: 100%;
+}
+#root:has(.not-found) .header,
+#root:has(.site-construction) .header {
+    position: static;
+    margin-bottom: 1em;
 }
 
 .header {
@@ -9,7 +15,7 @@
     align-items: center;
     z-index: 99;
     padding-block: 2.5em;
-    width: 100%;
+    width: 100dvw;
     backdrop-filter: brightness(70%);
 }
 
@@ -63,7 +69,7 @@
     height: 3px;
     width: 100%;
     z-index: -1;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color, transparent);
     transition: all 0.2s ease-in-out;
 }
 
@@ -73,7 +79,7 @@
 
 
 .header nav ul a:hover {
-    --bg-color:rgb(233, 118, 43);
+    --bg-color: rgb(233, 118, 43);
 }
 
 .header nav ul a.active {
@@ -208,18 +214,21 @@
     font-size: 2.45em;
     margin-bottom: 0.35em;
 }
-.hero-section h1 > span{
+
+.hero-section h1>span {
     position: relative;
 }
-.hero-section h1 > span::after {
+
+.hero-section h1>span::after {
     position: absolute;
     bottom: 2px;
     left: 0;
     content: '';
-    background-color:  rgb(233, 118, 43);
+    background-color: rgb(233, 118, 43);
     height: 5px;
     width: 85%;
 }
+
 .hero-section p {
     margin-bottom: 1.5em;
 }
@@ -256,6 +265,66 @@
     margin-bottom: 1em;
 }
 
+.site-construction {
+    display: grid;
+    place-items: center;
+    grid-template-rows: 1fr 2fr 1fr;
+    text-align: left;
+    max-width: 650px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 1.5em;
+}
+
+.site-construction section {
+    align-self: end;
+}
+
+.site-construction section h1 {
+    font-size: 2.5em;
+    margin-bottom: .4em;
+}
+
+.site-construction section p {
+    margin-bottom: 1em;
+}
+
+.site-construction figure {
+    width: 100%;
+    max-width: 300px;
+}
+
+.site-construction>a {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+
+
+
+.not-found {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    height: 75dvh;
+    
+}
+
+.not-found h1 {
+    font-size: 5em;
+}
+.not-found p {
+    padding: 1.5em;
+    margin-bottom: 1em;
+    letter-spacing: 3px;
+}
+.home-link {
+    background-color: rgb(233, 118, 43);
+    padding: 1em 1.5em;
+}
 @media only screen and (min-width: 650px) {
     .header {
         justify-content: space-between;
@@ -293,7 +362,8 @@
         --bg-img: url('assets/images/desktop-image-hero-3.jpg');
     }
 
-    .sect-wrapper, .about-section {
+    .sect-wrapper,
+    .about-section {
         padding-inline: 0;
     }
 
@@ -305,11 +375,32 @@
 }
 
 @media only screen and (min-width: 1280px) {
+    #root:has(.not-found) .header,
+    #root:has(.site-construction) .header {
+        position: static;
+        margin-bottom: 1em;
+        width: 100dvw;
+        color: rgb(29, 22, 22);
+    }
+        #root:has(.not-found) .header * ,
+    #root:has(.site-construction) .header * {
+        color: inherit;
+        transition: color .2s linear;
+    }
+
+    #root:has(.site-construction) .header a.active {
+        --bg-color: rgb(29, 22, 22);
+    }
+
+
     .header {
         justify-content: start;
         padding: 2.85em 2.85em;
         gap: 2.5em;
+        justify-self: left;
+        align-self: start;
         width: fit-content;
+        margin-right: auto;
         backdrop-filter: unset;
     }
 
@@ -318,7 +409,7 @@
         background-color: transparent;
     }
 
-    .main > .hero-container {
+    .main>.hero-container {
         display: grid;
         grid-template-columns: 840px 1fr;
         grid-template-rows: 1fr;
@@ -329,7 +420,8 @@
         height: 540px;
     }
 
-    .info-container, .btn-wrapper {
+    .info-container,
+    .btn-wrapper {
         position: static;
     }
 

@@ -66,3 +66,12 @@ img{
   line-height: 1.5;
   color: rgb(112, 81, 56);
 }
+ .attribution {
+   font-size: .75rem;
+   text-align: center;
+   padding: 1.5em;
+ }
+
+ .attribution a {
+   color: hsl(228, 45%, 44%);
+ }
